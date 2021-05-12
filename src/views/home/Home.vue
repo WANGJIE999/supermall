@@ -13,7 +13,7 @@ export default {
   name: "",
   data() {
     return {
-      active: String,
+      banners: [],
     };
   },
   components: { NavBar },
@@ -21,7 +21,7 @@ export default {
   created() {
     gethomemultidata().then((res) => {
       console.log(res);
-      this.active = res;
+      this.banners = res;
     });
   },
 };

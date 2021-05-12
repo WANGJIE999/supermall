@@ -4,7 +4,7 @@ import { request } from './request'
 export function gethomemultidata() {
 
     return request({
-        URL: '/posts/45'
+        URL: '/users'
     })
 
 }

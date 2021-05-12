@@ -19,7 +19,7 @@ export function request(config) {
     // 2.2响应拦截的作用
     instance.interceptors.response.use(res => {
         // console.log(res);
-        return res.data
+        return res
     }, err => {
         console.log(err);
     })
