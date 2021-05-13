@@ -9,6 +9,12 @@ const Shopcart = () => import('views/shopcart/Shopcart')
 
 Vue.use(VueRouter)
 
+//使用replace的方法解决冗余导航问题
+const RouterReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace(to) {
+  return RouterReplace.call(this, to).catch(err => err)
+}
+
 const routes = [
   {
     path: '/',
@@ -39,5 +45,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
 
 export default router
