@@ -3,28 +3,6 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <Carousel v-model="value1" loop>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="~assets/images/home/index_ad1.jpg" alt="" />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="~assets/images/home/index_ad2.jpg" alt="" />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="~assets/images/home/index_ad3.jpg" alt="" />
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <div class="demo-carousel">
-          <img src="~assets/images/home/index_ad4.jpg" alt="" />
-        </div>
-      </CarouselItem>
-    </Carousel>
   </div>
 </template>
 
@@ -36,7 +14,6 @@ export default {
   data() {
     return {
       banners: [],
-      value1: 0,
     };
   },
   components: { NavBar },
@@ -54,9 +31,5 @@ export default {
 .home-nav {
   background-color: rgb(238, 143, 159);
   color: #fff;
-}
-.demo-carousel img {
-  width: 375px;
-  height: 177px;
 }
 </style>
