@@ -1,11 +1,7 @@
 <template>
   <div id="shopcart">
     <nav-bar class="shopcart-nav"><div slot="center">购物车</div></nav-bar>
-    <el-table v-loading="loading" :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
-    </el-table>
+    <div class="block"></div>
   </div>
 </template>
 
@@ -14,26 +10,7 @@ import NavBar from "components/common/NavBar";
 export default {
   name: "",
   data() {
-    return {
-      tableData: [
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-      ],
-      loading: true,
-    };
+    return {};
   },
   components: { NavBar },
   mounted() {},
@@ -45,5 +22,24 @@ export default {
 .shopcart-nav {
   background-color: rgb(238, 143, 159);
   color: #fff;
+}
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+.imgs img {
+  width: 375px;
+  height: 194px;
 }
 </style>
