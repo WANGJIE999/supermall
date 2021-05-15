@@ -1,11 +1,15 @@
-<template>
+<template >
   <div class="special">
     <div class="loginform">
-      <img src="~assets/images/home/index_ad1.jpg" alt="" />
+      <!-- <img src="~assets/images/home/index_ad1.jpg" alt="" /> -->
       <div class="min">
         <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-          <FormItem prop="user">
-            <Input type="text" v-model="formInline.user" placeholder="Username">
+          <FormItem prop="username">
+            <Input
+              type="text"
+              v-model="formInline.username"
+              placeholder="Username"
+            >
               <Icon type="ios-person-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
@@ -23,6 +27,12 @@
             <Button type="primary" @click="handleSubmit('formInline')"
               >Signin</Button
             >
+            <Button
+              type="primary"
+              @click="handleReset('formInline')"
+              style="margin-left: 18px"
+              >Reset</Button
+            >
           </FormItem>
         </Form>
       </div>
@@ -31,16 +41,18 @@
 </template>
 
 <script>
+import { gethomemultidata } from "network/home";
+
 export default {
   name: "",
   data() {
     return {
       formInline: {
-        user: "",
-        password: "",
+        username: "admin",
+        password: "123456",
       },
       ruleInline: {
-        user: [
+        username: [
           {
             required: true,
             message: "请输入用户名",
@@ -56,7 +68,7 @@ export default {
           {
             type: "string",
             min: 6,
-            message: "The password length cannot be less than 6 bits",
+            message: "最少6位",
             trigger: "blur",
           },
         ],
@@ -64,15 +76,24 @@ export default {
     };
   },
   components: {},
+  computed: {},
   mounted() {},
   methods: {
+    handleReset(name) {
+      this.$refs[name].resetFields();
+    },
+
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success("Success!");
-        } else {
-          this.$Message.error("Fail!");
+          gethomemultidata().then((res) => {
+            console.log(res);
+            //判断登录是否成功
+            if (res.meta.status !== 200) return this.$Message.error("登录失败");
+            this.$Message.success("登录成功");
+          });
         }
+        return false;
       });
     },
   },
@@ -87,13 +108,14 @@ export default {
   margin: 200px auto;
   width: 530px;
   height: 300px;
-  border: 1px solid #bfa;
-  /* background-image: url("~assets/images/home/index_ad1.jpg"); */
+  background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);
+  box-shadow: 0px 1px 1px 1px rgba(194, 191, 191, 0.5);
 }
 .min {
   width: 200px;
   height: 120px;
-  margin: 50px auto;
+  padding: 50px 0px 0px 0px;
+  margin: 20px auto;
 }
 .loginform img {
   position: absolute;
