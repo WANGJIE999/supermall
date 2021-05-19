@@ -1,7 +1,23 @@
 <template>
   <div id="shopcart">
     <nav-bar class="shopcart-nav"><div slot="center">购物车</div></nav-bar>
-    <div class="block"></div>
+
+    <div class="block">
+      <div class="login_box">
+        <el-form size="mini" class="login_form">
+          <el-form-item>
+            <el-input prefix-icon="iconfont icon-user"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input prefix-icon="iconfont icon-3702mima"></el-input>
+          </el-form-item>
+          <el-form-item class="login_but">
+            <el-button type="primary">登录</el-button>
+            <el-button type="info">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,27 +35,32 @@ export default {
 </script>
 
 <style>
+#shopcart {
+  width: 100%;
+  height: 667px;
+  background-color: #4b6584;
+}
 .shopcart-nav {
   background-color: rgb(238, 143, 159);
   color: #fff;
 }
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
+.login_box {
+  width: 300px;
+  height: 200px;
+  background-color: #fff;
+  margin: 150px auto;
+  position: relative;
 }
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+.login_form {
+  position: absolute;
+  bottom: 25px;
+  width: 100%;
+  padding: 0px 10px;
 }
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
-.imgs img {
-  width: 375px;
-  height: 194px;
+.login_but {
+  /* 弹性盒子 */
+  display: flex;
+  /* 居右对其 */
+  justify-content: flex-end;
 }
 </style>

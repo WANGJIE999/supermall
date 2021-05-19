@@ -4,12 +4,8 @@
       <!-- <img src="~assets/images/home/index_ad1.jpg" alt="" /> -->
       <div class="min">
         <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-          <FormItem prop="username">
-            <Input
-              type="text"
-              v-model="formInline.username"
-              placeholder="Username"
-            >
+          <FormItem prop="name">
+            <Input type="text" v-model="formInline.name" placeholder="Username">
               <Icon type="ios-person-outline" slot="prepend"></Icon>
             </Input>
           </FormItem>
@@ -48,11 +44,11 @@ export default {
   data() {
     return {
       formInline: {
-        username: "admin",
-        password: "123456",
+        username: "",
+        password: "",
       },
       ruleInline: {
-        username: [
+        name: [
           {
             required: true,
             message: "请输入用户名",
@@ -108,8 +104,8 @@ export default {
   margin: 200px auto;
   width: 530px;
   height: 300px;
-  /* background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%); */
-  /* box-shadow: 0px 1px 1px 1px rgba(194, 191, 191, 0.5); */
+  background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);
+  box-shadow: 0px 1px 1px 1px rgba(194, 191, 191, 0.5);
 }
 .min {
   width: 200px;

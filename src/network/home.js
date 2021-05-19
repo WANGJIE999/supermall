@@ -4,7 +4,7 @@ import { request } from './request'
 export function gethomemultidata() {
 
     return request({
-        URL: '/Admin/Login',
+        url: 'login',
         method: 'post'
     })
 

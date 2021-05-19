@@ -15,9 +15,10 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
 
-
+import 'assets/fonts/iconfont.css'
 
 Vue.config.productionTip = false
+
 
 
 
