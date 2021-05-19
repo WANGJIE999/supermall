@@ -108,8 +108,8 @@ export default {
   margin: 200px auto;
   width: 530px;
   height: 300px;
-  background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);
-  box-shadow: 0px 1px 1px 1px rgba(194, 191, 191, 0.5);
+  /* background-image: linear-gradient(to top, #d299c2 0%, #fef9d7 100%); */
+  /* box-shadow: 0px 1px 1px 1px rgba(194, 191, 191, 0.5); */
 }
 .min {
   width: 200px;
