@@ -5,16 +5,31 @@
     </nav-bar>
     <div>
       <div class="login_box">
-        <el-form size="mini" class="login_form">
-          <el-form-item>
-            <el-input prefix-icon="iconfont icon-user"></el-input>
+        <el-form
+          ref="loginFormRef"
+          size="mini"
+          :rules="rules"
+          :model="loginForm"
+          class="login_form"
+        >
+          <el-form-item prop="username">
+            <el-input
+              v-model="loginForm.username"
+              prefix-icon="iconfont icon-user"
+            ></el-input>
           </el-form-item>
-          <el-form-item>
-            <el-input prefix-icon="iconfont icon-3702mima"></el-input>
+
+          <el-form-item prop="password">
+            <el-input
+              v-model="loginForm.password"
+              type="password"
+              prefix-icon="iconfont icon-3702mima"
+            ></el-input>
           </el-form-item>
+
           <el-form-item class="login_but">
-            <el-button type="primary">登录</el-button>
-            <el-button type="info">重置</el-button>
+            <el-button type="primary" @click="submitForm">登录</el-button>
+            <el-button type="info" @click="resetForm">重置</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -23,15 +38,63 @@
 </template>
 
 <script>
+// import { gethomemultidata } from "network/home";
 import NavBar from "components/common/NavBar";
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      // 数据绑定
+      loginForm: {
+        username: "",
+        password: "",
+      },
+      // 表单验证规则
+      rules: {
+        username: {
+          required: true,
+          message: "请输入姓名",
+          // 可以单个或者同时写两个触发验证方式
+          trigger: ["change", "blur"],
+        },
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            min: 6,
+            max: 10,
+            message: "长度在 6 到  10个字符",
+            trigger: "blur",
+          },
+        ],
+      },
+    };
   },
   components: { NavBar },
-  mounted() {},
-  methods: {},
+  methods: {
+    // 提交表单
+    submitForm() {
+      this.$refs.loginFormRef.validate(async (valid) => {
+        if (valid) {
+          const { data: res } = await this.$http.post("login", this.loginForm);
+          if (res.meta.status !== 200) {
+            this.$message.error('登录失败');
+          } else {
+            this.$message({
+              message: "登录成功",
+              type: "success",
+            });
+          }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    // 重置登录表单
+    resetForm() {
+      this.$refs.loginFormRef.resetFields();
+    },
+  },
 };
 </script>
 

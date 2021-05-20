@@ -22,6 +22,7 @@ export function request(config) {
     })
     // 2.2响应拦截的作用
     instance.interceptors.response.use(res => {
+        config.headers.Authorization = window.sessionStorage.getItem("token")
         // console.log(res);
         return res.data
     }, err => {
