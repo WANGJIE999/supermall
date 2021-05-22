@@ -1,14 +1,14 @@
 <template>
-  <div id="app">
+  <div>
     <router-view></router-view>
-    <!-- <main-tab-bar></main-tab-bar> -->
+    <main-tab-bar></main-tab-bar>
   </div>
 </template>
 
 <script>
 import MainTabBar from "components/contest/MainTabBar.vue";
 export default {
-  name: "app",
+  name: "",
   data() {
     return {};
   },
@@ -19,5 +19,4 @@ export default {
 </script>
 
 <style>
-@import "assets/css/base.css";
 </style>

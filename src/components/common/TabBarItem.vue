@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import NavBar from "components/common/NavBar";
 export default {
   name: "TabBarItem",
   data() {
@@ -25,6 +26,7 @@ export default {
       defolt: "red",
     },
   },
+  components: { NavBar },
   methods: {
     itemclick() {
       //活跃路由path赋值
@@ -61,5 +63,9 @@ export default {
 .actived {
   color: red;
   font-weight: bolder;
+}
+.shopcart-nav {
+  background-color: rgb(238, 143, 159);
+  color: #fff;
 }
 </style>

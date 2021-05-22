@@ -1,7 +1,7 @@
 <template>
   <div id="profile">
     <nav-bar class="profilr-nav">
-      <div slot="center">我的</div>
+      <div slot="center">登录</div>
     </nav-bar>
     <div>
       <div class="login_box">
@@ -14,19 +14,21 @@
         >
           <el-form-item prop="username">
             <el-input
+              class="formInput"
               v-model="loginForm.username"
               prefix-icon="iconfont icon-user"
-            ></el-input>
+            >
+            </el-input>
           </el-form-item>
-
           <el-form-item prop="password">
             <el-input
+              class="formInput"
               v-model="loginForm.password"
               type="password"
               prefix-icon="iconfont icon-3702mima"
-            ></el-input>
+            >
+            </el-input>
           </el-form-item>
-
           <el-form-item class="login_but">
             <el-button type="primary" @click="submitForm">登录</el-button>
             <el-button type="info" @click="resetForm">重置</el-button>
@@ -46,8 +48,8 @@ export default {
     return {
       // 数据绑定
       loginForm: {
-        username: "",
-        password: "",
+        username: "admin",
+        password: "123456",
       },
       // 表单验证规则
       rules: {
@@ -74,20 +76,15 @@ export default {
     // 提交表单
     submitForm() {
       this.$refs.loginFormRef.validate(async (valid) => {
-        if (valid) {
-          const { data: res } = await this.$http.post("login", this.loginForm);
-          if (res.meta.status !== 200) {
-            this.$message.error('登录失败');
-          } else {
-            this.$message({
-              message: "登录成功",
-              type: "success",
-            });
-          }
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
+        if (!valid) return;
+        const { data: res } = await this.$http.post("login", this.loginForm);
+        if (res.meta.status !== 200) return this.$message.error("登录失败");
+        console.log(res);
+        this.$message.success("登录成功");
+        // token赋值给sessionStorage
+        window.sessionStorage.setItem("token", res.data.token);
+        // 路由跳转
+        this.$router.push("/home");
       });
     },
     // 重置登录表单
@@ -119,12 +116,15 @@ export default {
   position: absolute;
   bottom: 25px;
   width: 100%;
-  padding: 0px 10px;
+  padding: 0px 40px;
 }
 .login_but {
   /* 弹性盒子 */
   display: flex;
   /* 居右对其 */
   justify-content: flex-end;
+}
+.formInput {
+  width: 220px;
 }
 </style>

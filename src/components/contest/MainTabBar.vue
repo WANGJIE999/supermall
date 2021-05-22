@@ -37,7 +37,7 @@
         /></slot>
         <slot slot="tab-text">购物车</slot>
       </tab-bar-item>
-      <tab-bar-item path="profile">
+      <tab-bar-item path="my">
         <slot slot="tab-bar"
           ><img src="~assets/images/tabbar/profile.svg" alt=""
         /></slot>
@@ -53,17 +53,21 @@
 <script>
 import TabBar from "components/common/TabBar.vue";
 import TabBarItem from "components/common/TabBarItem.vue";
-
+import NavBar from "components/common/NavBar";
 export default {
   name: "MainTabBar",
   data() {
     return {};
   },
-  components: { TabBar, TabBarItem },
+  components: { TabBar, TabBarItem, NavBar },
   mounted() {},
   methods: {},
 };
 </script>
 
 <style>
+.home-nav {
+  background-color: rgb(238, 143, 159);
+  color: #fff;
+}
 </style>
