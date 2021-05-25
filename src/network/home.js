@@ -8,6 +8,4 @@ export function gethomemultidata() {
         url: 'login',
         method: 'post'
     })
-
-
 }

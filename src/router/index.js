@@ -9,6 +9,16 @@ const Shopcart = () => import('views/shopcart/Shopcart')
 const Special = () => import('views/special/Special')
 const Big = () => import('views/big/Big')
 const My = () => import('views/my/My')
+const Welcome = () => import('views/welcome/Welcome')
+
+const Users = () => import('components/login/users/Users')
+const Goods = () => import('components/login/goods/Goods')
+const Reports = () => import('components/login/reports/Reports')
+const Rights = () => import('components/login/rights/Rights')
+const Orders = () => import('components/login/orders/Orders')
+const Roles = () => import('components/login/roles/Roles')
+const Categories = () => import('components/login/categories/Categories')
+const Params = () => import('components/login/params/Params')
 
 Vue.use(VueRouter)
 
@@ -30,9 +40,45 @@ const routes = [
       {
         path: '/home',
         component: Home,
+        children: [{
+          path: '',
+          component: Welcome
+        },
+        {
+          path: '/users',
+          component: Users
+        },
+        {
+          path: '/goods',
+          component: Goods
+        },
+        {
+          path: '/reports',
+          component: Reports
+        },
+        {
+          path: '/rights',
+          component: Rights
+        },
+        {
+          path: '/orders',
+          component: Orders
+        },
+        {
+          path: '/roles',
+          component: Roles
+        },
+        {
+          path: '/categories',
+          component: Categories
+        },
+        {
+          path: '/params',
+          component: Params
+        },
+        ]
       },
       {
-
         path: '/shopcart',
         component: Shopcart
       },
@@ -51,7 +97,7 @@ const routes = [
       }
     ]
   },
-  
+
   {
     path: '/profile',
     component: Profile

@@ -79,7 +79,7 @@ export default {
         if (!valid) return;
         const { data: res } = await this.$http.post("login", this.loginForm);
         if (res.meta.status !== 200) return this.$message.error("登录失败");
-        console.log(res);
+        // console.log(res);
         this.$message.success("登录成功");
         // token赋值给sessionStorage
         window.sessionStorage.setItem("token", res.data.token);
@@ -96,9 +96,7 @@ export default {
 </script>
 
 <style>
-.iconfont {
-  margin-left: -10px;
-}
+
 #profile {
   width: 100%;
   height: 667px;

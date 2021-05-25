@@ -15,26 +15,44 @@
       </el-header>
       <el-container>
         <!-- 侧边栏 -->
-        <el-aside width="200px">
-          <el-menu background-color="#333744" text-color="#fff">
-                <!-- 一级菜单 -->
-            <el-submenu v-for="item in MenuList" :key="item.id" :index="item.id + ''">
+        <el-aside :width="iscollapse ? '64px' : '200px'">
+          <div class="toggle-button" @click="butcollapse">|||</div>
+
+          <el-menu
+            background-color="#333744"
+            text-color="#fff"
+            unique-opened
+            :collapse="iscollapse"
+            :collapse-transition="false"
+            router
+          >
+            <!-- 一级菜单 -->
+            <el-submenu
+              v-for="item in MenuList"
+              :key="item.id"
+              :index="item.id + ''"
+            >
               <template slot="title">
                 <i :class="iconList[item.id]"></i>
                 <span>{{ item.authName }}</span>
               </template>
-                <!-- 二级菜单 -->
-                <el-menu-item v-for="subItem in item.children" :key="subItem.id" :index="subItem.id +''" >
-                  <i class="el-icon-menu"></i>
-                  {{subItem.authName}}
-                </el-menu-item>
 
+              <!-- 二级菜单 -->
+              <el-menu-item
+                v-for="subItem in item.children"
+                :key="subItem.id"
+                :index="'/' + subItem.path"
+              >
+                <i class="el-icon-menu"></i>
+                {{ subItem.authName }}
+              </el-menu-item>
             </el-submenu>
-
           </el-menu>
         </el-aside>
         <!-- 主页内容 -->
-        <el-main></el-main>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -47,13 +65,14 @@ export default {
   data() {
     return {
       MenuList: [],
-      iconList:{
-        '125':'iconfont icon-user',
-        '103':'iconfont icon-tijikongjian',
-        '101':'iconfont icon-shangpin',
-        '102':'iconfont icon-danju',
-        '145':'iconfont icon-baobiao'
-      }
+      iconList: {
+        125: "iconfont icon-user",
+        103: "iconfont icon-tijikongjian",
+        101: "iconfont icon-shangpin",
+        102: "iconfont icon-danju",
+        145: "iconfont icon-baobiao",
+      },
+      iscollapse: false,
     };
   },
   components: { NavBar },
@@ -66,7 +85,10 @@ export default {
       const { data: res } = await this.$http.get("menus");
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
       this.MenuList = res.data;
-      console.log(res);
+      // console.log(res);
+    },
+    butcollapse() {
+      this.iscollapse = !this.iscollapse;
     },
   },
   created() {
@@ -76,10 +98,21 @@ export default {
 </script>
 
 <style>
+.toggle-button {
+  /* 鼠标手指 */
+  cursor: pointer;
+  line-height: 24px;
+  letter-spacing: 0.2em;
+  font-size: 10px;
+  text-align: center;
+  color: #fff;
+  background-color: #4a5064;
+}
 .home-container {
   height: 640px;
 }
 .el-header {
+  width: 1396px;
   background-color: #373d41;
   color: #fff;
   display: flex;
@@ -102,12 +135,15 @@ export default {
   background-color: #333744;
 }
 .el-main {
+  width: 1396px;
   background-color: #eaedf1;
 }
 .home-nav {
+  width: 1396px;
   background-color: rgb(211, 94, 94);
   color: #fff;
 }
-.el-button{
+.el-submenu {
+  width: 200px;
 }
 </style>
