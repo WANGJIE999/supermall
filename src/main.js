@@ -23,6 +23,21 @@ Vue.config.productionTip = false
 import axios from 'axios'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 Vue.prototype.$http = axios
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = window.sessionStorage.getItem("token")
+  // 1.config中的一些信息不符合服务器的要求
+  // 2.比如每次向服务器请求时，界面出现一个加载动画
+  // 3.某些网络请求(比如登录（token),必须携带一些特殊信息
+  return config
+}, err => {
+  console.log(err);
+})
+
+
+
+
+
+
 
 
 

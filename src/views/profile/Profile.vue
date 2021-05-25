@@ -96,6 +96,9 @@ export default {
 </script>
 
 <style>
+.iconfont {
+  margin-left: -10px;
+}
 #profile {
   width: 100%;
   height: 667px;

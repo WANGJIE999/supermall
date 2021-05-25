@@ -51,6 +51,7 @@ const routes = [
       }
     ]
   },
+  
   {
     path: '/profile',
     component: Profile
@@ -74,6 +75,4 @@ router.beforeEach((to, Form, next) => {
   next();
 
 })
-
-
 export default router
