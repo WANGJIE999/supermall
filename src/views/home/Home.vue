@@ -112,7 +112,7 @@ export default {
   height: 640px;
 }
 .el-header {
-  width: 1396px;
+  width: 1536px;
   background-color: #373d41;
   color: #fff;
   display: flex;
@@ -139,7 +139,7 @@ export default {
   background-color: #eaedf1;
 }
 .home-nav {
-  width: 1396px;
+  width: 1536px;
   background-color: rgb(211, 94, 94);
   color: #fff;
 }
