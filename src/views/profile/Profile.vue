@@ -96,11 +96,13 @@ export default {
 </script>
 
 <style>
-
 #profile {
   width: 100%;
-  height: 667px;
-  background-color: #4b6584;
+  height: 762px;
+  background-image: url(~assets/images/home/2.jpg);
+  background-repeat: no-repeat;
+  /*这里的100% auto 表示将背景图片的长度100%显示，高度自适应*/
+  background-size: 100% auto;
 }
 .profilr-nav {
   background-color: rgb(238, 143, 159);

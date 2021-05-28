@@ -21,7 +21,12 @@
    */
   
   body {
-    margin: 0;
+      margin: 0;
+      padding: 0;
+      background-image: url(../images/home/2.jpg);
+      background-repeat: no-repeat;
+      /*这里的100% auto 表示将背景图片的长度100%显示，高度自适应*/
+      background-size: 100% auto;
   }
   
   /**

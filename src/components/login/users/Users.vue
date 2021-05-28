@@ -31,7 +31,7 @@
           <template slot-scope="scope">
             <!-- 获取整行dome数据 -->
             <!-- {{ scope.row }} -->
-            <el-switch v-model="scope.row.mg_state"> </el-switch>
+            <el-switch v-model="scope.row.mg_state" @change='userStateChanged(scope.row)'> </el-switch>
           </template>
         </el-table-column>
         <el-table-column label="操作" width='180'>
@@ -66,7 +66,9 @@ export default {
     return {
       queryInfo: {
         query: "",
+        // 当前页数
         pagenum: 1,
+        // 当前每页显示多少条数据
         pagesize: 2,
       },
       usersList: [],
@@ -76,25 +78,41 @@ export default {
   components: {},
   mounted() {},
   methods: {
+    // 获取用户信息
     async getUserList() {
-      const { data: res } = await this.$http.get("users", {
-        params: this.queryInfo,
-      });
-      // console.log(res);
+      const { data: res } = await this.$http.get("users", 
+    // 对象参数
+      { params: this.queryInfo,});
+
+
       if (res.meta.status !== 200)
         return this.$message.error("获取用户列表失败");
       this.usersList = res.data.users;
-      this.tolal = res.data.tolal;
+      this.total = res.data.total;
     },
+    // 监听pagesize改变的事件
       handleSizeChange(val) {
-        // 
         this.queryInfo.pagesize = val
         this.getUserList();
       },
+      // 监听pagenum改变事件
       handleCurrentChange(val) {
         this.queryInfo.pagenum = val
-        // console.log(`当前页: ${val}`);
-      }
+        this.getUserList();
+      },
+    // 监听switch状态改变
+    async userStateChanged(userInfo){
+    // 修改用户状态
+    const {data:res}= await this.$http.put(`users/${userInfo.id}/state/${userInfo.mg_state}`)
+    // 判断状态码是否修改成功
+    if(res.meta.status !== 200){
+      userInfo.mg_state = !userInfo.mg_state
+      this.$message.error('更新用户状态失败')
+    }
+      this.$message.success('更新用户状态成功')
+    }
+
+
   },
   created() {
     this.getUserList();
@@ -114,5 +132,8 @@ export default {
 .el-table {
   margin-top: 15px;
   font-size: 12px;
+}
+.el-pagination{
+  margin-top: 20px;
 }
 </style>
