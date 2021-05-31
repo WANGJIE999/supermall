@@ -77,10 +77,12 @@ export default {
     submitForm() {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return;
+
         const { data: res } = await this.$http.post("login", this.loginForm);
         if (res.meta.status !== 200) return this.$message.error("登录失败");
-        // console.log(res);
+
         this.$message.success("登录成功");
+        
         // token赋值给sessionStorage
         window.sessionStorage.setItem("token", res.data.token);
         // 路由跳转
@@ -98,7 +100,7 @@ export default {
 <style>
 #profile {
   width: 100%;
-  height: 762px;
+  height: 693px;
   background-image: url(~assets/images/home/2.jpg);
   background-repeat: no-repeat;
   /*这里的100% auto 表示将背景图片的长度100%显示，高度自适应*/

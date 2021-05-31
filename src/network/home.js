@@ -6,6 +6,7 @@ export function gethomemultidata() {
     return request({
 
         url: 'login',
-        method: 'post'
+        method: 'post',
+        data:''
     })
 }
