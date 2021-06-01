@@ -61,6 +61,7 @@
               icon="el-icon-delete"
               circle
               size="mini"
+              @click="deltUser(scope.row.id)"
             ></el-button>
             <el-tooltip
               effect="dark"
@@ -125,32 +126,40 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="addUser">确 定</el-button>
-        <el-button type="info" @click="resetForm">重置</el-button>
+        <el-button type="info" @click="resetForm">重 置</el-button>
       </span>
     </el-dialog>
 
-<!--修改用户对话框 -->
-    <el-dialog title="修改用户" :visible.sync="editDialogVisible" width="50%" @close="editClosed">
+    <!--修改用户对话框 -->
+    <el-dialog
+      title="修改用户"
+      :visible.sync="editDialogVisible"
+      width="50%"
+      @close="editClosed"
+    >
       <span>
-        <el-form :model="editForm" :rules="rules" ref="editFormRef" label-width="100px" >
+        <el-form
+          :model="editForm"
+          :rules="rules"
+          ref="editFormRef"
+          label-width="100px"
+        >
           <el-form-item label="用户名">
-          <el-input v-model="editForm.username" disabled></el-input>
+            <el-input v-model="editForm.username" disabled></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
-          <el-input v-model="editForm.email"></el-input>
+            <el-input v-model="editForm.email"></el-input>
           </el-form-item>
           <el-form-item label="手机号" prop="mobile">
-          <el-input v-model="editForm.mobile"></el-input>
+            <el-input v-model="editForm.mobile"></el-input>
           </el-form-item>
         </el-form>
-
       </span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="editModified">确 定</el-button>
       </span>
     </el-dialog>
-
   </div>
 </template>
 
@@ -185,7 +194,7 @@ export default {
         mobile: "",
       },
       // 查询到的用户信息对象
-      editForm:{},
+      editForm: {},
       rules: {
         username: {
           required: true,
@@ -215,9 +224,7 @@ export default {
           },
         ],
       },
-      editRules:{
-
-      }
+      editRules: {},
     };
   },
   components: {},
@@ -259,13 +266,6 @@ export default {
       }
       this.$message.success("更新用户状态成功");
     },
-    handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then((_) => {
-          done();
-        })
-        .catch((_) => {});
-    },
     // 重置添加用户表单
     resetForm() {
       this.$refs.loginFormRef.resetFields();
@@ -286,36 +286,46 @@ export default {
       });
     },
     // 退出对话框取消验证规则
-    dialogClosed(){
-        this.$refs.loginFormRef.resetFields() 
+    dialogClosed() {
+      this.$refs.loginFormRef.resetFields();
     },
     // 根据id获取用户信息
-   async showEditDialog(id) {
-     console.log(id);
+    async showEditDialog(id) {
+      console.log(id);
       this.editDialogVisible = true;
-    const {data:res}= await this.$http.get('users/'+id)
-    if(res.meta.status !== 200) return console.log(res.data);
-    this.editForm = res.data
+      const { data: res } = await this.$http.get("users/" + id);
+      if (res.meta.status !== 200) return console.log(res.data);
+      this.editForm = res.data;
     },
     // 修改成功
-    editModified(){
+    editModified() {
       this.editDialogVisible = false;
-  
-      this.$refs.editFormRef.validate(async valid=>{
-        if(!valid) return;
+
+      this.$refs.editFormRef.validate(async (valid) => {
+        if (!valid) return;
         // 修改用户信息的请求
-      const {data:res}= await this.$http.put('users/'+this.editForm.id,{email:this.editForm.email,mobile:this.editForm.mobile})
-        if(res.meta.status !==200)return this.$message.error('更新用户失败');
-        this.$message.success('更新用户成功') 
-        this.getUserList()
-      }
-      )
+        const { data: res } = await this.$http.put(
+          "users/" + this.editForm.id,
+          { email: this.editForm.email, mobile: this.editForm.mobile }
+        );
+        if (res.meta.status !== 200) return this.$message.error("更新用户失败");
+        this.$message.success("更新用户成功");
+        this.getUserList();
+      });
     },
     // 退出对话框取消验证规则
-    editClosed(){
-      this.$refs.editFormRef.resetFields() 
-    }
+    editClosed() {
+      this.$refs.editFormRef.resetFields();
+    },
+    // 删除单个用户
+    async deltUser(id) {
+      const { data: res } = await this.$http.delete("users/" + id);
+      if (res.meta.status !== 200) return this.$message.error("删除失败 ");
+      this.$message.success("删除成功");
+      this.getUserList();
+    },
   },
+  // 组件加载成功回调函数
   created() {
     this.getUserList();
   },
