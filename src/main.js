@@ -36,6 +36,10 @@ axios.interceptors.request.use(config => {
 
 
 
+import Mock from './mock/index'
+Mock.init()
+Vue.prototype.$ajax = axios
+
 
 
 
