@@ -31,7 +31,7 @@ VueRouter.prototype.replace = function replace(to) {
 const routes = [
   {
     path: '/',
-    redirect: '/Profile'
+    redirect: '/profile'
   },
   {
     path: '/big',

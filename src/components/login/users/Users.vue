@@ -23,9 +23,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="dialogVisible = true"
-            >添加用户</el-button
-          >
+          <el-button type="primary" @click="dialogVisible = true">添加用户</el-button>
         </el-col>
       </el-row>
 
@@ -300,7 +298,6 @@ export default {
     // 修改成功
     editModified() {
       this.editDialogVisible = false;
-
       this.$refs.editFormRef.validate(async (valid) => {
         if (!valid) return;
         // 修改用户信息的请求
