@@ -1,8 +1,8 @@
 <template>
   <div id="profile">
-    <nav-bar class="profilr-nav">
+    <!-- <nav-bar class="profilr-nav">
       <div slot="center">登录</div>
-    </nav-bar>
+    </nav-bar> -->
     <div>
       <div class="login_box">
         <el-form
@@ -82,7 +82,7 @@ export default {
         if (res.meta.status !== 200) return this.$message.error("登录失败");
 
         this.$message.success("登录成功");
-        
+
         // token赋值给sessionStorage
         window.sessionStorage.setItem("token", res.data.token);
         // 路由跳转
@@ -100,11 +100,12 @@ export default {
 <style>
 #profile {
   width: 100%;
-  height: 693px;
+  height: 730px;
   background-image: url(~assets/images/home/2.jpg);
   background-repeat: no-repeat;
   /*这里的100% auto 表示将背景图片的长度100%显示，高度自适应*/
   background-size: 100% auto;
+  overflow:hidden;
 }
 .profilr-nav {
   background-color: rgb(238, 143, 159);
@@ -116,6 +117,8 @@ export default {
   background-color: #fff;
   margin: 150px auto;
   position: relative;
+  background: rgba(231, 228, 228, 0.116);
+
 }
 .login_form {
   position: absolute;

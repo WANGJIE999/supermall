@@ -109,7 +109,7 @@ export default {
   background-color: #4a5064;
 }
 .home-container {
-  height: 640px;
+  height: 700px;
 }
 .el-header {
   width: 100%;
@@ -140,8 +140,8 @@ export default {
 }
 .home-nav {
   width: 100%;
-  background-color: rgb(211, 94, 94);
-  color: #fff;
+  background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  color: rgb(12, 12, 12);
 }
 .el-submenu {
   width: 200px;

@@ -33,19 +33,6 @@ axios.interceptors.request.use(config => {
   console.log(err);
 })
 
-
-
-
-import Mock from './mock/index'
-Mock.init()
-Vue.prototype.$ajax = axios
-
-
-
-
-
-
-
 new Vue({
   router,
   store,
